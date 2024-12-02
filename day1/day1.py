@@ -1,6 +1,7 @@
 # Start of day 1!
 # Read in file input
 f = open("day1.in", "r+")
+
 # Put into list to make easier to parse through
 lines = f.readlines()
 # Remove newlines
@@ -17,3 +18,19 @@ for i in range(len(list1)):
   sumdistance += abs(list1[i] - list2[i])
 print(sumdistance)
 
+# Part 2
+list2dict = {}
+for item in list2:
+  if item not in list2dict:
+    list2dict[item] = 1
+  else:
+    list2dict[item] += 1
+
+print(list2dict)
+f.close()
+similarityscore = 0
+for item in list1:
+  if item in list2dict:
+    similarityscore += (item * list2dict[item])
+
+print(similarityscore)
