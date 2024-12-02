@@ -8,9 +8,12 @@ lines = [line.strip() for line in lines]
 # Separate into separate lists
 list1 = [int(line.split()[0]) for line in lines]
 list2 = [int(line.split()[1]) for line in lines]
+# Sort lists
 list1.sort()
 list2.sort()
+# Find distances
 sumdistance = 0
 for i in range(len(list1)):
   sumdistance += abs(list1[i] - list2[i])
 print(sumdistance)
+
