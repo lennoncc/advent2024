@@ -24,3 +24,17 @@ for report in reports:
     numTrue += 1
 
 print(numTrue)
+
+# Part 2
+numTrue = 0
+for report in reports:
+  # Check report if it's safe, if it is just keep count
+  if checkSafety(report):
+    numTrue += 1
+  # If not, apply dampener
+  else:
+    for i in range(len(report)):
+      if checkSafety(report[:i]+report[i+1:]):
+        numTrue += 1
+        break
+print(numTrue)
