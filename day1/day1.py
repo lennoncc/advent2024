@@ -16,7 +16,7 @@ list2.sort()
 sumdistance = 0
 for i in range(len(list1)):
   sumdistance += abs(list1[i] - list2[i])
-print(sumdistance)
+# print(sumdistance)
 
 # Part 2
 list2dict = {}
@@ -26,7 +26,7 @@ for item in list2:
   else:
     list2dict[item] += 1
 
-print(list2dict)
+# print(list2dict)
 f.close()
 similarityscore = 0
 for item in list1:
