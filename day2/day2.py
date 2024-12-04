@@ -30,11 +30,14 @@ numTrue = 0
 for report in reports:
   # Check report if it's safe, if it is just keep count
   if checkSafety(report):
+    print(f'Safe: {report}')
     numTrue += 1
   # If not, apply dampener
   else:
     for i in range(len(report)):
       if checkSafety(report[:i]+report[i+1:]):
         numTrue += 1
+        print(f'Safe with {report[i]} removed, {report}')
         break
+    print(f'Unsafe: {report}')
 print(numTrue)
