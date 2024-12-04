@@ -13,7 +13,7 @@ f.close()
 f = open("day3.in", "r+")
 everything = f.read()
 search = re.findall(r"mul\((\d{1,3}),(\d{1,3})\)|(do\(\))|(don't\(\))", everything)
-# print(search)
+
 dobool = True
 answer = 0
 for pair in search:
