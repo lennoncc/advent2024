@@ -1,37 +1,9 @@
+import re
 f = open("day3.in", "r+")
 everything = f.read()
-potentialparse = everything.split('mul')
-def mul(x,y):
-  return x*y
+isolatedmul = re.findall(r'mul\((\d{1,3}),(\d{1,3})\)',everything)
 answer = 0
-
-print(potentialparse)
-
-for item in potentialparse:
-  if len(item) > 1:
-    stack = []
-    start = False
-    for char in item:
-      if char == '(':
-        start = True
-      if char.isdigit():
-        stack.append(char)
-      if char == ',' and start:
-        print(f'stack is {stack}')
-        num1 = ''
-        while len(stack) > 0:
-          num1 += stack.pop()
-      if char == ')' and len(stack) > 0 and start:
-        print(f'stack is {stack}')
-        num2 = ''
-        while len(stack) > 0:
-          num2 += stack.pop()
-        print(f'num1 is {num1[::-1]}, num2 is {num2[::-1]}')
-        answer += mul(int(num1), int(num2))
-        start = False
-        break
-  
-
-    
+for pair in isolatedmul:
+  answer += (int(pair[0])*int(pair[1]))
 
 print(answer)
