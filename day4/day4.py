@@ -1,72 +1,129 @@
-f = open("test.in", "r+")
+f = open("day4.in", "r+")
 everything = f.readlines()
 everything = [item.strip() for item in everything]
 def check(x,y,grid):
+  # x is row, y is col
   # diagonal
   letters = ['X','M','A','S']
-  lettersinversed = ['S','A','M','X']
-  # Diagonally
-  # X
-  #  M
-  #   A
-  #    S
+  matches = 0
+  found = True
   for i in range(4):
-    if grid[x+i][y+i] != letters[i]:
-      return False
-  # Backwards Diagonally
-  # S
-  #  A
-  #   M
-  #    X
-  for i in range(3,-1,-1):
-    if grid[x+i][y+i] != lettersinversed[i]:
-      return False
-  # Diagonally reversed
-  #    S
-  #   A
-  #  M
-  # X
+    # Forwards XMAS
+    try:
+      if grid[x+i][y] != letters[i]:
+        found = False
+        break
+    except:
+      found = False
+      break
+  if found:
+    matches += 1
+    print(f'Found match at {x},{y}, forwards')
+  found = True
   for i in range(4):
-    if grid[x+i][y-i] != letters[i]:
-      return False
-  # Backwards Diagonally reversed
-  #    X
-  #   M
-  #  A
-  # S
-  for i in range(3,-1,-1):
-    if grid[x+i][y-i] != lettersinversed[i]:
-      return False
-  # Forwards
-  # XMAS
+    # Backwards SAMX
+    try:
+      if grid[x-i][y] != letters[i]:
+        found = False
+        break
+    except:
+      found = False
+      break
+  if found:
+    matches += 1
+    print(f'Found match at {x},{y}, backwards')
+  found = True
   for i in range(4):
-    if grid[x+i][y] != letters[i]:
+    # Downwards XMAS
+    try:
+      if grid[x][y+i] != letters[i]:
+        found = False
+        break
+    except:
+      found = False
       break
-  # Backwards
-  # SAMX
-  for i in range(3,-1,-1):
-    if grid[x+i][y] != lettersinversed[i]:
-      break
-  # Downwards
-  # X
-  # M
-  # A
-  # S
+  if found:
+    matches += 1
+    print(f'Found match at {x},{y}, downwards')
+  found = True
   for i in range(4):
-    if grid[x][y+i] != letters[i]:
+    # Upwards XMAS
+    try:
+      if grid[x][y-i] != letters[i]:
+        found = False
+        break
+    except:
+      found = False
       break
-  # Upwards
-  # S
-  # M
-  # A
-  # X
-  for i in range(3,-1,-1):
-    if grid[x][y+i] != lettersinversed[i]:
+  if found:
+    matches += 1
+    print(f'Found match at {x},{y}, upwards')
+  found = True
+  for i in range(4):
+    # Down Right XMAS
+    try:
+      if grid[x+i][y+i] != letters[i]:
+        found = False
+        break
+    except:
+      found = False
       break
+  if found:
+    matches += 1
+    print(f'Found match at {x},{y}, dr')
+  found = True
+  for i in range(4):
+    # Down Left SAMX
+    try:
+      if grid[x-i][y+i] != letters[i]:
+        found = False
+        break
+    except:
+      found = False
+      break
+  if found:
+    matches += 1
+    print(f'Found match at {x},{y}, dl')
+    for i in range(4):
+      print(x-i,y+i)
+  found = True
+  for i in range(4):
+    # Up Right XMAS
+    try:
+      if grid[x+i][y-i] != letters[i]:
+        found = False
+        break
+    except:
+      found = False
+      break
+  if found:
+    matches += 1
+    print(f'Found match at {x},{y}, ur')
+  found = True
+  for i in range(4):
+    # Up Left XMAS
+    try:
+      if grid[x-i][y-i] != letters[i]:
+        found = False
+        break
+      elif x-i < 0 or y-i < 0:
+        found = False
+        break
+    except:
+      found = False
+      break
+  if found:
+    matches += 1
+    print(f'Found match at {x},{y}, ul')
+    for i in range(4):
+      print(x-i,y-i)
+  
+  return matches
   
   
-
+count = 0
 for i in range(len(everything)):
   for j in range(len(everything[0])):
-    if i < len(everything)-4 and j < len(everything[0])-4:
-      print(check(i,j,everything))
+    # if i < len(everything)-4 and j < len(everything[0])-4:
+    count += check(i,j,everything)
+print(count)
