@@ -139,3 +139,34 @@ for i in range(len(everything)):
     # if i < len(everything)-4 and j < len(everything[0])-4:
     count += check(i,j,everything)
 print(count)
+
+def part2(row,col,grid):
+  try:
+    if grid[row][col] == 'A':
+      if row-1 >= 0 and col-1 >= 0:
+
+        # Topleft match topright M, bottomleft match bottomright S
+        if grid[row-1][col-1] == grid[row-1][col+1] and grid[row-1][col+1] == 'M'  and grid[row+1][col-1] == grid[row+1][col+1] and grid[row+1][col+1] == 'S':
+          return True
+        # Topleft match topright S, bottomleft match bottomright M
+        if grid[row-1][col-1] == grid[row-1][col+1] and grid[row-1][col+1] == 'S'  and grid[row+1][col-1] == grid[row+1][col+1] and grid[row+1][col+1] == 'M':
+          return True
+        # Topleft match bottomleft M, topright match bottomright S
+        if grid[row-1][col-1] == grid[row+1][col-1] and grid[row+1][col-1] == 'M' and grid[row-1][col+1] == grid[row+1][col+1] and grid[row+1][col+1] == 'S':
+          return True
+        # Topleft match bottomleft M, topright match bottomright S
+        if grid[row-1][col-1] == grid[row+1][col-1] and grid[row+1][col-1] == 'S' and grid[row-1][col+1] == grid[row+1][col+1] and grid[row+1][col+1] == 'M':
+          return True
+        
+  except:
+    return False
+  return False
+count = 0
+for i in range(len(everything)):
+  for j in range(len(everything[0])):
+    if part2(i,j,everything):
+      count += 1
+print(count)
+
+
+
