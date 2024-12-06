@@ -26,6 +26,9 @@ def check(x,y,grid):
       if grid[x-i][y] != letters[i]:
         found = False
         break
+      elif x-i < 0:
+        found = False
+        break
     except:
       found = False
       break
@@ -50,6 +53,9 @@ def check(x,y,grid):
     # Upwards XMAS
     try:
       if grid[x][y-i] != letters[i]:
+        found = False
+        break
+      elif y-i < 0:
         found = False
         break
     except:
@@ -78,6 +84,9 @@ def check(x,y,grid):
       if grid[x-i][y+i] != letters[i]:
         found = False
         break
+      elif x-i < 0:
+        found = False
+        break
     except:
       found = False
       break
@@ -91,6 +100,9 @@ def check(x,y,grid):
     # Up Right XMAS
     try:
       if grid[x+i][y-i] != letters[i]:
+        found = False
+        break
+      elif y-i < 0:
         found = False
         break
     except:
